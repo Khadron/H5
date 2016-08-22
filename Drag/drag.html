@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Naruto</title>
+		<style type="text/css" media="screen">
+			#src > * {float:left;}
+			#target,#src > img{border:thin solid black;padding:2px;magin:4px;}
+			#target{height:205px;width:205px;text-align:center;display: table;}
+			#target > p{dispaly:table-cell;vertical-align:middle;}
+			#target > img{ margin:1px; }
+			img.dragged{background-color:lightgrey;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="src" >
+				<img draggable="true" id="小李" src="xiaoli.jpg" />			
+				<img draggable="true" id="卡卡西" src="kakaxi.jpg" />			
+				<img draggable="true" id="佐助" src="zuozhu.jpg" />	
+				<img draggable="true" id="鸣人" src="mingren.jpg" />				
+				<div id="target" >
+				<p id="msg" >Drop Here</p>
+				</div>
+				</div>
+		
+		<script>
+			
+			var src=document.getElementById('src');
+			var target=document.getElementById("target");
+			var msg=document.getElementById("msg");
+			var draggedID;
+
+			target.ondragenter=handleDrag;
+			target.ondragover=handleDrag;
+
+			function handleDrag(e){
+				e.preventDefault();
+			}
+
+			target.ondrop=function(e){
+				var newElem=document.getElementById(draggedID).cloneNode(false);
+				target.innerHTML="";
+				target.appendChild(newElem);
+				e.preventDefault();
+			}
+
+			src.ondragstart=function(e){
+				draggedID=e.target.id;
+				e.target.classList.add("dragged");
+			}
+
+			src.ondrag=function(e){
+				msg.innerHTML=e.target.id;
+			}
+
+			
+			src.ondragend=function(e){
+				e.target.classList.remove("dragged");
+				msg.innerHTML="Drop Here";
+			}
+
+
+		</script>
+	</body>
+
+</html>
