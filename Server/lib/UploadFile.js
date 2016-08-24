@@ -1,4 +1,4 @@
-
+ï»¿
 var http = require('http');
 var fs = require('fs');
 var util = require('util');
@@ -30,7 +30,7 @@ exports.UploadFile = function () {
 
             if (contentType.indexOf("multipart/form-data") > -1) {
 
-                request.setEncoding('binary'); //ÉèÖÃ±àÂë¸ñÊ½Îª¶ş½øÖÆ
+                request.setEncoding('binary'); //è®¾ç½®ç¼–ç æ ¼å¼ä¸ºäºŒè¿›åˆ¶
                 var body = '';
                 var fileName = '';
 
@@ -55,26 +55,25 @@ exports.UploadFile = function () {
                             if (fileName.indexOf('\\') != -1) {
                                 fileName = fileName.substring(fileName.lastIndexOf('\\') + 1);
                             }
-                            console.log("ÎÄ¼şÃû: " + fileName);
+                            console.log("æ–‡ä»¶å: " + fileName);
                         }
                     }
-
 
                     var entireData = body.toString();
                     contentType = file['Content-Type'].substring(1);
 
-                    //»ñÈ¡ÎÄ¼ş¶ş½øÖÆÊı¾İ¿ªÊ¼Î»ÖÃ£¬¼´contentTypeµÄ½áÎ²
+                    //è·å–äºŒè¿›åˆ¶æ–‡ä»¶å¼€å§‹çš„ä½ç½®ï¼Œå³contentTypeçš„ç»“å°¾
                     var upperBoundary = entireData.indexOf(contentType) + contentType.length;
                     var shorterData = entireData.substring(upperBoundary);
 
-                    // Ìæ»»¿ªÊ¼Î»ÖÃµÄ¿Õ¸ñ
+                    //æ›¿æ¢å¼€å§‹ä½ç½®çš„ç©ºæ ¼
                     var binaryDataAlmost = shorterData.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 
-                    // È¥³ıÊı¾İÄ©Î²µÄ¶îÍâÊı¾İ£¬¼´: "--"+ boundary + "--"
+                    //å»é™¤æ•°æ®æœ«å°¾çš„æ ‡è®°ï¼Œå³ï¼š"--boundaryTag--"
                     var binaryData = binaryDataAlmost.substring(0, binaryDataAlmost.indexOf('--' + boundary + '--'));
 
-                    // ±£´æÎÄ¼ş
-                    fs.writeFile(fileName, binaryData, 'utf-8', function (err) {
+                    //ä¿å­˜æ–‡ä»¶
+                    fs.writeFile(fileName, binaryData, 'binary', function (err) {
                         writeResponse(err);
                     });
                 });
