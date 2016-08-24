@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Example</title>
+    <style>
+        body > * {
+            float: left;
+        }
+
+        #target {
+            border: medium double black;
+            margin: 4px;
+            height: 75px;
+            width: 200px;
+            text-align: center;
+            display: table;
+        }
+
+            #target > p {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+        table {
+            margin: 4px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="target">
+        <p id="msg">Drop File Here</p>
+    </div>
+    <table id="data" border="1"></table>
+
+    <script>
+
+        var httpRequest = new XMLHttpRequest();
+        var fileList;
+        var target = document.getElementById("target");
+
+        target.ondragenter = handleDrag;
+        target.ondragover = handleDrag;
+
+        function handleDrag(e) {
+            e.preventDefault();
+        }
+
+        target.ondrop = function (e) {
+            e.preventDefault();
+
+            var files = e.dataTransfer.files;
+            var formData = new FormData();
+            var i;
+            for (i = 0; i < files.length; i++) {
+                formData.append("file" + i, files[i]);
+            }
+
+            httpRequest.onreadystatechange = handleResponse;
+            httpRequest.open("POST", "http://localhost:8081/upload/");
+            httpRequest.send(formData);
+
+            var tableElem = document.getElementById("data");
+
+            tableElem.innerHTML = "<tr><th>Name</th><th>Type</th><th>Size</th></tr>";
+            for (i = 0; i < files.length; i++) {
+                var row = "<tr><td>" + files[i].name + "</td><td>" + files[i].type + "</td><td>" + files[i].size + "</td></tr>";
+                tableElem.innerHTML += row;
+
+            }
+        }
+
+        function handleResponse() {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+            }
+
+        }
+
+    </script>
+</body>
+</html>

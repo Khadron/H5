@@ -18,7 +18,7 @@ function writeResponse(response, data) {
     response.end();
 }
 
-htt.createServer(function (request, response) {
+http.createServer(function (request, response) {
     console.log("[200]" + request.method + " to " + request.url);
     if (request.method == "OPTIONS") {
         response.writeHead(200, "OK", {
