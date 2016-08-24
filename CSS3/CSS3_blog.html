@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        p {
+            padding: 8px;
+            border: medium double goldenrod;
+            background-color: lightgray;
+            font-family: sans-serif;
+        }
+
+        /*#mubiao {
+            font-size: large;
+            border: medium solid white;
+        }*/
+
+
+        /*反向过渡*/
+        /*#mubiao {
+            font-size: large;
+            border: medium solid white;
+            -webkit-transition-delay: 10ms;
+            -webkit-transition-duration: 250ms;
+        }*/
+        #mubiao {
+            -webkit-animation-duration: 250ms;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: alternate;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-name: dachui;
+            animation-play-state: paused;
+        }
+
+        /*最初*/
+        /*#mubiao:hover {
+                font-size: x-large;
+                border: medium solid white;
+                background-color: goldenrod;
+                color: white;
+                padding: 4px;
+            }*/
+        /*使用过渡*/
+        /*#mubiao:hover {
+                font-size: x-large;
+                border: medium solid white;
+                background-color: goldenrod;
+                color: white;
+                padding: 4px;
+                -webkit-transition-delay: 100ms;
+                -webkit-transition-property: background-color, color, padding, font-size, border;
+                -webkit-transition-duration: 500ms;
+                -webkit-transition-timing-function: linear;
+            }*/
+        /*使用动画*/
+        /*#mubiao:hover {
+                -webkit-animation-delay: 100ms;
+                -webkit-animation-duration: 500ms;
+                -webkit-animation-iteration-count: infinite;
+                -webkit-animation-timing-function: linear;
+                -webkit-animation-name: "dachui";
+                -webkit-animation-direction: alternate;
+            }*/
+
+        @-webkit-keyframes dachui {
+            from {
+                font-size: xx-small;
+                background-color: red;
+            }
+
+            50% {
+                background-color: #00bfff;
+                padding: 1px;
+            }
+
+            75% {
+                color: white;
+                padding: 2px;
+            }
+
+            to {
+                font-size: x-large;
+                border: medium solid white;
+                background-color: goldenrod;
+                color: white;
+                padding: 4px;
+            }
+        }
+
+        /*变换*/
+        #baifumei {
+            display: inline-block;
+            font-size: x-large;
+            border: thick white;
+            background-color: pink;
+            color: white;
+            padding: 4px;
+            -webkit-transform: rotate(-45deg) scaleX(1.2);
+            -webkit-transform-origin: right top;
+        }
+
+            #baifumei:hover {
+                -webkit-transition-duration: 1.5s;
+                -webkit-transform: rotate(0deg);
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="start">开始</button>
+        <button id="end">暂停</button>
+    </div>
+    <p>
+        我就会升职加薪，当上总经理，出任CEO，迎娶<span id="baifumei">白富美</span>，走向<span id="mubiao">人生巅峰</span>！想想还有点小激动
+    </p>
+
+    <script type="text/javascript">
+        var start = document.getElementById('start');
+        var end = document.getElementById('end');
+
+        start.onclick = function (e) {
+            document.getElementById('mubiao').style.webkitAnimationPlayState = 'running';
+        }
+        end.onclick = function (e) {
+            document.getElementById('mubiao').style.webkitAnimationPlayState = 'paused';
+        }
+
+    </script>
+</body>
+</html>

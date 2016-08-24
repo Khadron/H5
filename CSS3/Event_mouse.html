@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Mouseover和Mouseenter，Mouseout和Mouseleave 的区别    
+        <button id="reset">重置</button></h1>
+
+    <div id="over" style="background-color: lightgray; padding: 20px; width: 40%; float: left">
+        <h2 style="background-color: white;">被触发的 Mouseover 事件：<span id="span1"></span></h2>
+    </div>
+    <div id="enter" style="background-color: lightgray; padding: 20px; width: 40%; float: right">
+        <h2 style="background-color: white;">被触发的 Mouseenter 事件：<span id="span2"></span></h2>
+    </div>
+    <br style="clear: both" />
+    <hr />
+
+    <div id="out" style="background-color: lightgray; padding: 20px; width: 40%; float: left">
+        <h2 style="background-color: white;">被触发的 Mouseout 事件：<span id="span3"></span></h2>
+    </div>
+    <div id="leave" style="background-color: lightgray; padding: 20px; width: 40%; float: right">
+        <h2 style="background-color: white;">被触发的 Mouseleave 事件：<span id="span4"></span></h2>
+    </div>
+
+    <script type="text/javascript">
+        a = 0;
+        b = 0;
+        c = 0;
+        d = 0;
+
+
+
+        var over = document.getElementById("over");
+        var enter = document.getElementById("enter");
+        var span1 = document.getElementById("span1");
+        var span2 = document.getElementById("span2");
+
+        var out = document.getElementById("out");
+        var leave = document.getElementById("leave");
+        var span3 = document.getElementById("span3");
+        var span4 = document.getElementById("span4");
+
+        var reset = document.getElementById("reset");
+        reset.onclick = function (e) {
+            span1.innerText = '';
+            span2.innerText = '';
+            span3.innerText = '';
+            span4.innerText = '';
+            a = 0;
+            b = 0;
+            c = 0;
+            d = 0;
+
+        }
+
+        over.onmouseover = function (e) {
+            span1.innerText = a += 1;
+        };
+        enter.onmouseenter = function (e) {
+            span2.innerText = b += 1;
+        };
+
+        out.onmouseout = function (e) {
+            span3.innerText = c += 1;
+        };
+        leave.onmouseleave = function (e) {
+            span4.innerText = d += 1;
+        };
+    </script>
+</body>
+</html>
